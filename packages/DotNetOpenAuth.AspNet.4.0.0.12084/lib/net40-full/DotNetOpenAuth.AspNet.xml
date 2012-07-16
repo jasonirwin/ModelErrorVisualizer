@@ -1,0 +1,1221 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DotNetOpenAuth.AspNet</name>
+    </assembly>
+    <members>
+        <member name="T:DotNetOpenAuth.AspNet.AuthenticationResult">
+            <summary>
+            Represents the result of OAuth or OpenID authentication.
+            </summary>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.AuthenticationResult.Failed">
+            <summary>
+            Returns an instance which indicates failed authentication.
+            </summary>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.AuthenticationResult.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotNetOpenAuth.AspNet.AuthenticationResult"/> class.
+            </summary>
+            <param name="isSuccessful">
+            if set to <c>true</c> [is successful]. 
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.AuthenticationResult.#ctor(System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotNetOpenAuth.AspNet.AuthenticationResult"/> class.
+            </summary>
+            <param name="exception">
+            The exception. 
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.AuthenticationResult.#ctor(System.Boolean,System.String,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotNetOpenAuth.AspNet.AuthenticationResult"/> class.
+            </summary>
+            <param name="isSuccessful">
+            if set to <c>true</c> [is successful]. 
+            </param>
+            <param name="provider">
+            The provider. 
+            </param>
+            <param name="providerUserId">
+            The provider user id. 
+            </param>
+            <param name="userName">
+            Name of the user. 
+            </param>
+            <param name="extraData">
+            The extra data. 
+            </param>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.AuthenticationResult.Error">
+            <summary>
+            Gets the error that may have occured during the authentication process
+            </summary>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.AuthenticationResult.ExtraData">
+            <summary>
+            Gets the optional extra data that may be returned from the provider
+            </summary>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.AuthenticationResult.IsSuccessful">
+            <summary>
+            Gets a value indicating whether the authentication step is successful.
+            </summary>
+            <value> <c>true</c> if authentication is successful; otherwise, <c>false</c> . </value>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.AuthenticationResult.Provider">
+            <summary>
+            Gets the provider's name.
+            </summary>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.AuthenticationResult.ProviderUserId">
+            <summary>
+            Gets the user id that is returned from the provider.  It is unique only within the Provider's namespace.
+            </summary>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.AuthenticationResult.UserName">
+            <summary>
+            Gets an (insecure, non-unique) alias for the user that the user should recognize as himself/herself.
+            </summary>
+            <value>This may take the form of an email address, a URL, or any other value that the user may recognize.</value>
+            <remarks>
+            This alias may come from the Provider or may be derived by the relying party if the Provider does not supply one.
+            It is not guaranteed to be unique and certainly does not merit any trust in any suggested authenticity.
+            </remarks>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.Clients.DictionaryExtensions">
+            <summary>
+            The dictionary extensions.
+            </summary>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.DictionaryExtensions.AddDataIfNotEmpty(System.Collections.Generic.Dictionary{System.String,System.String},System.Xml.Linq.XDocument,System.String)">
+            <summary>
+            Adds the value from an XDocument with the specified element name if it's not empty.
+            </summary>
+            <param name="dictionary">
+            The dictionary. 
+            </param>
+            <param name="document">
+            The document. 
+            </param>
+            <param name="elementName">
+            Name of the element. 
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.DictionaryExtensions.AddItemIfNotEmpty(System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String)">
+            <summary>
+            Adds a key/value pair to the specified dictionary if the value is not null or empty.
+            </summary>
+            <param name="dictionary">
+            The dictionary. 
+            </param>
+            <param name="key">
+            The key. 
+            </param>
+            <param name="value">
+            The value. 
+            </param>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.IAuthenticationClient">
+            <summary>
+            Represents a client which can authenticate users via an external website/provider.
+            </summary>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.IAuthenticationClient.RequestAuthentication(System.Web.HttpContextBase,System.Uri)">
+            <summary>
+            Attempts to authenticate users by forwarding them to an external website, and upon succcess or failure, redirect users back to the specified url.
+            </summary>
+            <param name="context">
+            The context of the current request. 
+            </param>
+            <param name="returnUrl">
+            The return url after users have completed authenticating against external website. 
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.IAuthenticationClient.VerifyAuthentication(System.Web.HttpContextBase)">
+            <summary>
+            Check if authentication succeeded after user is redirected back from the service provider.
+            </summary>
+            <param name="context">
+            The context of the current request. 
+            </param>
+            <returns>
+            An instance of <see cref="T:DotNetOpenAuth.AspNet.AuthenticationResult"/> containing authentication result. 
+            </returns>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.IAuthenticationClient.ProviderName">
+            <summary>
+            Gets the name of the provider which provides authentication service.
+            </summary>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.Clients.FacebookClient">
+            <summary>
+            The facebook client.
+            </summary>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.Clients.OAuth2Client">
+            <summary>
+            Represents the base class for OAuth 2.0 clients
+            </summary>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.Clients.OAuth2Client.providerName">
+            <summary>
+            The provider name.
+            </summary>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.Clients.OAuth2Client.returnUrl">
+            <summary>
+            The return url.
+            </summary>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.OAuth2Client.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotNetOpenAuth.AspNet.Clients.OAuth2Client"/> class with the specified provider name.
+            </summary>
+            <param name="providerName">
+            Name of the provider. 
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.OAuth2Client.RequestAuthentication(System.Web.HttpContextBase,System.Uri)">
+            <summary>
+            Attempts to authenticate users by forwarding them to an external website, and upon succcess or failure, redirect users back to the specified url.
+            </summary>
+            <param name="context">
+            The context.
+            </param>
+            <param name="returnUrl">
+            The return url after users have completed authenticating against external website. 
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.OAuth2Client.VerifyAuthentication(System.Web.HttpContextBase)">
+            <summary>
+            Check if authentication succeeded after user is redirected back from the service provider.
+            </summary>
+            <param name="context">
+            The context.
+            </param>
+            <returns>
+            An instance of <see cref="T:DotNetOpenAuth.AspNet.AuthenticationResult"/> containing authentication result. 
+            </returns>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.OAuth2Client.GetServiceLoginUrl(System.Uri)">
+            <summary>
+            Gets the full url pointing to the login page for this client. The url should include the specified return url so that when the login completes, user is redirected back to that url.
+            </summary>
+            <param name="returnUrl">
+            The return URL. 
+            </param>
+            <returns>
+            An absolute URL. 
+            </returns>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.OAuth2Client.GetUserData(System.String)">
+            <summary>
+            Given the access token, gets the logged-in user's data. The returned dictionary must include two keys 'id', and 'username'.
+            </summary>
+            <param name="accessToken">
+            The access token of the current user. 
+            </param>
+            <returns>
+            A dictionary contains key-value pairs of user data 
+            </returns>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.OAuth2Client.QueryAccessToken(System.Uri,System.String)">
+            <summary>
+            Queries the access token from the specified authorization code.
+            </summary>
+            <param name="returnUrl">
+            The return URL. 
+            </param>
+            <param name="authorizationCode">
+            The authorization code. 
+            </param>
+            <returns>
+            The access token 
+            </returns>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.Clients.OAuth2Client.ProviderName">
+            <summary>
+            Gets the name of the provider which provides authentication service.
+            </summary>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.Clients.FacebookClient.AuthorizationEndpoint">
+            <summary>
+            The authorization endpoint.
+            </summary>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.Clients.FacebookClient.TokenEndpoint">
+            <summary>
+            The token endpoint.
+            </summary>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.Clients.FacebookClient.appId">
+            <summary>
+            The _app id.
+            </summary>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.Clients.FacebookClient.appSecret">
+            <summary>
+            The _app secret.
+            </summary>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.FacebookClient.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotNetOpenAuth.AspNet.Clients.FacebookClient"/> class.
+            </summary>
+            <param name="appId">
+            The app id.
+            </param>
+            <param name="appSecret">
+            The app secret.
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.FacebookClient.GetServiceLoginUrl(System.Uri)">
+            <summary>
+            The get service login url.
+            </summary>
+            <param name="returnUrl">
+            The return url.
+            </param>
+            <returns>An absolute URI.</returns>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.FacebookClient.GetUserData(System.String)">
+            <summary>
+            The get user data.
+            </summary>
+            <param name="accessToken">
+            The access token.
+            </param>
+            <returns>A dictionary of profile data.</returns>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.FacebookClient.QueryAccessToken(System.Uri,System.String)">
+            <summary>
+            Obtains an access token given an authorization code and callback URL.
+            </summary>
+            <param name="returnUrl">
+            The return url.
+            </param>
+            <param name="authorizationCode">
+            The authorization code.
+            </param>
+            <returns>
+            The access token.
+            </returns>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.Clients.FacebookGraphData">
+            <summary>
+            Contains data of a Facebook user.
+            </summary>
+            <remarks>
+            Technically, this class doesn't need to be public, but because we want to make it serializable in medium trust, it has to be public.
+            </remarks>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.Clients.FacebookGraphData.Birthday">
+            <summary>
+            Gets or sets the birthday.
+            </summary>
+            <value> The birthday. </value>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.Clients.FacebookGraphData.Email">
+            <summary>
+            Gets or sets the email.
+            </summary>
+            <value> The email. </value>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.Clients.FacebookGraphData.Gender">
+            <summary>
+            Gets or sets the gender.
+            </summary>
+            <value> The gender. </value>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.Clients.FacebookGraphData.Id">
+            <summary>
+            Gets or sets the id.
+            </summary>
+            <value> The id. </value>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.Clients.FacebookGraphData.Link">
+            <summary>
+            Gets or sets the link.
+            </summary>
+            <value> The link. </value>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.Clients.FacebookGraphData.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value> The name. </value>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.Clients.JsonHelper">
+            <summary>
+            The json helper.
+            </summary>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.JsonHelper.Deserialize``1(System.IO.Stream)">
+            <summary>
+            The deserialize.
+            </summary>
+            <param name="stream">
+            The stream.
+            </param>
+            <typeparam name="T">The type of the value to deserialize.</typeparam>
+            <returns>
+            The deserialized value.
+            </returns>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.Clients.OAuth2AccessTokenData">
+            <summary>
+            Captures the result of an access token request, including an optional refresh token.
+            </summary>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.Clients.OAuth2AccessTokenData.AccessToken">
+            <summary>
+            Gets or sets the access token.
+            </summary>
+            <value> The access token. </value>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.Clients.OAuth2AccessTokenData.RefreshToken">
+            <summary>
+            Gets or sets the refresh token.
+            </summary>
+            <value> The refresh token. </value>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.Clients.OAuth2AccessTokenData.Scope">
+            <summary>
+            Gets or sets the scope.
+            </summary>
+            <value> The scope. </value>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.Clients.OAuth2AccessTokenData.TokenType">
+            <summary>
+            Gets or sets the type of the token.
+            </summary>
+            <value> The type of the token. </value>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.Clients.WindowsLiveClient">
+            <summary>
+            The windows live client.
+            </summary>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.Clients.WindowsLiveClient.AuthorizationEndpoint">
+            <summary>
+            The authorization endpoint.
+            </summary>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.Clients.WindowsLiveClient.TokenEndpoint">
+            <summary>
+            The token endpoint.
+            </summary>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.Clients.WindowsLiveClient.appId">
+            <summary>
+            The _app id.
+            </summary>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.Clients.WindowsLiveClient.appSecret">
+            <summary>
+            The _app secret.
+            </summary>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.WindowsLiveClient.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotNetOpenAuth.AspNet.Clients.WindowsLiveClient"/> class.
+            </summary>
+            <param name="appId">
+            The app id.
+            </param>
+            <param name="appSecret">
+            The app secret.
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.WindowsLiveClient.GetServiceLoginUrl(System.Uri)">
+            <summary>
+            Gets the full url pointing to the login page for this client. The url should include the specified return url so that when the login completes, user is redirected back to that url.
+            </summary>
+            <param name="returnUrl">The return URL.</param>
+            <returns>
+            An absolute URL.
+            </returns>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.WindowsLiveClient.GetUserData(System.String)">
+            <summary>
+            Given the access token, gets the logged-in user's data. The returned dictionary must include two keys 'id', and 'username'.
+            </summary>
+            <param name="accessToken">
+            The access token of the current user. 
+            </param>
+            <returns>
+            A dictionary contains key-value pairs of user data 
+            </returns>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.WindowsLiveClient.QueryAccessToken(System.Uri,System.String)">
+            <summary>
+            Queries the access token from the specified authorization code.
+            </summary>
+            <param name="returnUrl">
+            The return URL. 
+            </param>
+            <param name="authorizationCode">
+            The authorization code. 
+            </param>
+            <returns>
+            The query access token.
+            </returns>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.Clients.WindowsLiveUserData">
+            <summary>
+            Contains data of a Windows Live user.
+            </summary>
+            <remarks>
+            Technically, this class doesn't need to be public, but because we want to make it serializable in medium trust, it has to be public.
+            </remarks>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.Clients.WindowsLiveUserData.FirstName">
+            <summary>
+            Gets or sets the first name.
+            </summary>
+            <value> The first name. </value>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.Clients.WindowsLiveUserData.Gender">
+            <summary>
+            Gets or sets the gender.
+            </summary>
+            <value> The gender. </value>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.Clients.WindowsLiveUserData.Id">
+            <summary>
+            Gets or sets the id.
+            </summary>
+            <value> The id. </value>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.Clients.WindowsLiveUserData.LastName">
+            <summary>
+            Gets or sets the last name.
+            </summary>
+            <value> The last name. </value>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.Clients.WindowsLiveUserData.Link">
+            <summary>
+            Gets or sets the link.
+            </summary>
+            <value> The link. </value>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.Clients.WindowsLiveUserData.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value> The name. </value>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.Clients.DotNetOpenAuthWebConsumer">
+            <summary>
+            The dot net open auth web consumer.
+            </summary>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.Clients.IOAuthWebWorker">
+            <summary>
+            The io auth web worker.
+            </summary>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.IOAuthWebWorker.PrepareAuthorizedRequest(DotNetOpenAuth.Messaging.MessageReceivingEndpoint,System.String)">
+            <summary>
+            The prepare authorized request.
+            </summary>
+            <param name="profileEndpoint">
+            The profile endpoint.
+            </param>
+            <param name="accessToken">
+            The access token.
+            </param>
+            <returns>An HTTP request.</returns>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.IOAuthWebWorker.ProcessUserAuthorization">
+            <summary>
+            The process user authorization.
+            </summary>
+            <returns>The response message.</returns>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.IOAuthWebWorker.RequestAuthentication(System.Uri)">
+            <summary>
+            The request authentication.
+            </summary>
+            <param name="callback">
+            The callback.
+            </param>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.Clients.DotNetOpenAuthWebConsumer.webConsumer">
+            <summary>
+            The _web consumer.
+            </summary>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.DotNetOpenAuthWebConsumer.#ctor(DotNetOpenAuth.OAuth.ServiceProviderDescription,DotNetOpenAuth.OAuth.ChannelElements.IConsumerTokenManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotNetOpenAuth.AspNet.Clients.DotNetOpenAuthWebConsumer"/> class.
+            </summary>
+            <param name="serviceDescription">
+            The service description.
+            </param>
+            <param name="tokenManager">
+            The token manager.
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.DotNetOpenAuthWebConsumer.PrepareAuthorizedRequest(DotNetOpenAuth.Messaging.MessageReceivingEndpoint,System.String)">
+            <summary>
+            The prepare authorized request.
+            </summary>
+            <param name="profileEndpoint">
+            The profile endpoint.
+            </param>
+            <param name="accessToken">
+            The access token.
+            </param>
+            <returns>An HTTP request.</returns>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.DotNetOpenAuthWebConsumer.ProcessUserAuthorization">
+            <summary>
+            The process user authorization.
+            </summary>
+            <returns>The response message.</returns>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.DotNetOpenAuthWebConsumer.RequestAuthentication(System.Uri)">
+            <summary>
+            The request authentication.
+            </summary>
+            <param name="callback">
+            The callback.
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.DotNetOpenAuthWebConsumer.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.DotNetOpenAuthWebConsumer.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.Clients.InMemoryOAuthTokenManager">
+            <summary>
+            An implementation of IOAuthTokenManager which stores keys in memory.
+            </summary>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.Clients.InMemoryOAuthTokenManager.tokensAndSecrets">
+            <summary>
+            The _tokens and secrets.
+            </summary>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.InMemoryOAuthTokenManager.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotNetOpenAuth.AspNet.Clients.InMemoryOAuthTokenManager"/> class.
+            </summary>
+            <param name="consumerKey">
+            The consumer key. 
+            </param>
+            <param name="consumerSecret">
+            The consumer secret. 
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.InMemoryOAuthTokenManager.ExpireRequestTokenAndStoreNewAccessToken(System.String,System.String,System.String,System.String)">
+            <summary>
+            Deletes a request token and its associated secret and stores a new access token and secret.
+            </summary>
+            <param name="consumerKey">
+            The Consumer that is exchanging its request token for an access token. 
+            </param>
+            <param name="requestToken">
+            The Consumer's request token that should be deleted/expired. 
+            </param>
+            <param name="accessToken">
+            The new access token that is being issued to the Consumer. 
+            </param>
+            <param name="accessTokenSecret">
+            The secret associated with the newly issued access token. 
+            </param>
+            <remarks>
+            <para>
+            Any scope of granted privileges associated with the request token from the
+            	original call to
+            	<see cref="M:DotNetOpenAuth.AspNet.Clients.InMemoryOAuthTokenManager.StoreNewRequestToken(DotNetOpenAuth.OAuth.Messages.UnauthorizedTokenRequest,DotNetOpenAuth.OAuth.Messages.ITokenSecretContainingMessage)"/>
+            	should be carried over
+            	to the new Access Token.
+            </para>
+            <para>
+            To associate a user account with the new access token,
+            	                                	<see cref="P:System.Web.HttpContext.User">HttpContext.Current.User</see>
+            	                                	may be
+            	                                	useful in an ASP.NET web application within the implementation of this method.
+            	                                	Alternatively you may store the access token here without associating with a user account,
+            	                                	and wait until
+            	                                	<see cref="M:DotNetOpenAuth.OAuth.WebConsumer.ProcessUserAuthorization"/>
+            	                                	or
+            	                                	<see cref="M:DotNetOpenAuth.OAuth.DesktopConsumer.ProcessUserAuthorization(System.String,System.String)"/>
+            	                                	return the access
+            	                                	token to associate the access token with a user account at that point.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.InMemoryOAuthTokenManager.GetTokenSecret(System.String)">
+            <summary>
+            Gets the Token Secret given a request or access token.
+            </summary>
+            <param name="token">
+            The request or access token. 
+            </param>
+            <returns>
+            The secret associated with the given token. 
+            </returns>
+            <exception cref="T:System.ArgumentException">
+            Thrown if the secret cannot be found for the given token.
+            </exception>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.InMemoryOAuthTokenManager.GetTokenType(System.String)">
+            <summary>
+            Classifies a token as a request token or an access token.
+            </summary>
+            <param name="token">
+            The token to classify. 
+            </param>
+            <returns>
+            Request or Access token, or invalid if the token is not recognized. 
+            </returns>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.InMemoryOAuthTokenManager.StoreNewRequestToken(DotNetOpenAuth.OAuth.Messages.UnauthorizedTokenRequest,DotNetOpenAuth.OAuth.Messages.ITokenSecretContainingMessage)">
+            <summary>
+            Stores a newly generated unauthorized request token, secret, and optional application-specific parameters for later recall.
+            </summary>
+            <param name="request">
+            The request message that resulted in the generation of a new unauthorized request token. 
+            </param>
+            <param name="response">
+            The response message that includes the unauthorized request token. 
+            </param>
+            <exception cref="T:System.ArgumentException">
+            Thrown if the consumer key is not registered, or a required parameter was not found in the parameters collection.
+            </exception>
+            <remarks>
+            Request tokens stored by this method SHOULD NOT associate any user account with this token. It usually opens up security holes in your application to do so. Instead, you associate a user account with access tokens (not request tokens) in the <see cref="M:DotNetOpenAuth.AspNet.Clients.InMemoryOAuthTokenManager.ExpireRequestTokenAndStoreNewAccessToken(System.String,System.String,System.String,System.String)"/> method.
+            </remarks>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.Clients.InMemoryOAuthTokenManager.ConsumerKey">
+            <summary>
+            Gets the consumer key.
+            </summary>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.Clients.InMemoryOAuthTokenManager.ConsumerSecret">
+            <summary>
+            Gets the consumer secret.
+            </summary>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.Clients.LinkedInClient">
+            <summary>
+            Represents LinkedIn authentication client.
+            </summary>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.Clients.OAuthClient">
+            <summary>
+            Represents base class for OAuth 1.0 clients
+            </summary>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.OAuthClient.#ctor(System.String,DotNetOpenAuth.OAuth.ServiceProviderDescription,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotNetOpenAuth.AspNet.Clients.OAuthClient"/> class.
+            </summary>
+            <param name="providerName">
+            Name of the provider. 
+            </param>
+            <param name="serviceDescription">
+            The service description. 
+            </param>
+            <param name="consumerKey">
+            The consumer key. 
+            </param>
+            <param name="consumerSecret">
+            The consumer secret. 
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.OAuthClient.#ctor(System.String,DotNetOpenAuth.OAuth.ServiceProviderDescription,DotNetOpenAuth.OAuth.ChannelElements.IConsumerTokenManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotNetOpenAuth.AspNet.Clients.OAuthClient"/> class.
+            </summary>
+            <param name="providerName">
+            Name of the provider. 
+            </param>
+            <param name="serviceDescription">
+            The service Description.
+            </param>
+            <param name="tokenManager">
+            The token Manager.
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.OAuthClient.#ctor(System.String,DotNetOpenAuth.AspNet.Clients.IOAuthWebWorker)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotNetOpenAuth.AspNet.Clients.OAuthClient"/> class.
+            </summary>
+            <param name="providerName">
+            The provider name.
+            </param>
+            <param name="webWorker">
+            The web worker.
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.OAuthClient.RequestAuthentication(System.Web.HttpContextBase,System.Uri)">
+            <summary>
+            Attempts to authenticate users by forwarding them to an external website, and upon succcess or failure, redirect users back to the specified url.
+            </summary>
+            <param name="context">
+            The context.
+            </param>
+            <param name="returnUrl">
+            The return url after users have completed authenticating against external website. 
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.OAuthClient.VerifyAuthentication(System.Web.HttpContextBase)">
+            <summary>
+            Check if authentication succeeded after user is redirected back from the service provider.
+            </summary>
+            <param name="context">
+            The context.
+            </param>
+            <returns>
+            An instance of <see cref="T:DotNetOpenAuth.AspNet.AuthenticationResult"/> containing authentication result. 
+            </returns>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.OAuthClient.VerifyAuthenticationCore(DotNetOpenAuth.OAuth.Messages.AuthorizedTokenResponse)">
+            <summary>
+            Check if authentication succeeded after user is redirected back from the service provider.
+            </summary>
+            <param name="response">
+            The response token returned from service provider 
+            </param>
+            <returns>
+            Authentication result 
+            </returns>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.Clients.OAuthClient.ProviderName">
+            <summary>
+            Gets the name of the provider which provides authentication service.
+            </summary>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.Clients.OAuthClient.WebWorker">
+            <summary>
+            Gets the OAuthWebConsumer instance which handles constructing requests to the OAuth providers.
+            </summary>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.Clients.LinkedInClient.LinkedInServiceDescription">
+            <summary>
+            Describes the OAuth service provider endpoints for LinkedIn.
+            </summary>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.LinkedInClient.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotNetOpenAuth.AspNet.Clients.LinkedInClient"/> class.
+            </summary>
+            <param name="consumerKey">
+            The LinkedIn app's consumer key. 
+            </param>
+            <param name="consumerSecret">
+            The LinkedIn app's consumer secret. 
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.LinkedInClient.VerifyAuthenticationCore(DotNetOpenAuth.OAuth.Messages.AuthorizedTokenResponse)">
+            <summary>
+            Check if authentication succeeded after user is redirected back from the service provider.
+            </summary>
+            <param name="response">
+            The response token returned from service provider 
+            </param>
+            <returns>
+            Authentication result. 
+            </returns>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.Clients.TwitterClient">
+            <summary>
+            Represents a Twitter client
+            </summary>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.Clients.TwitterClient.TwitterServiceDescription">
+            <summary>
+            The description of Twitter's OAuth protocol URIs for use with their "Sign in with Twitter" feature.
+            </summary>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.TwitterClient.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotNetOpenAuth.AspNet.Clients.TwitterClient"/> class with the specified consumer key and consumer secret.
+            </summary>
+            <param name="consumerKey">
+            The consumer key. 
+            </param>
+            <param name="consumerSecret">
+            The consumer secret. 
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.TwitterClient.VerifyAuthenticationCore(DotNetOpenAuth.OAuth.Messages.AuthorizedTokenResponse)">
+            <summary>
+            Check if authentication succeeded after user is redirected back from the service provider.
+            </summary>
+            <param name="response">
+            The response token returned from service provider 
+            </param>
+            <returns>
+            Authentication result 
+            </returns>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.Clients.GoogleOpenIdClient">
+            <summary>
+            Represents Google OpenID client.
+            </summary>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.Clients.OpenIdClient">
+            <summary>
+            Base classes for OpenID clients.
+            </summary>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.Clients.OpenIdClient.RelyingParty">
+            <summary>
+            The _openid relaying party.
+            </summary>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.Clients.OpenIdClient.providerIdentifier">
+            <summary>
+            The _provider identifier.
+            </summary>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.Clients.OpenIdClient.providerName">
+            <summary>
+            The _provider name.
+            </summary>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.OpenIdClient.#ctor(System.String,DotNetOpenAuth.OpenId.Identifier)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotNetOpenAuth.AspNet.Clients.OpenIdClient"/> class.
+            </summary>
+            <param name="providerName">
+            Name of the provider. 
+            </param>
+            <param name="providerIdentifier">
+            The provider identifier, which is the usually the login url of the specified provider. 
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.OpenIdClient.RequestAuthentication(System.Web.HttpContextBase,System.Uri)">
+            <summary>
+            Attempts to authenticate users by forwarding them to an external website, and upon succcess or failure, redirect users back to the specified url.
+            </summary>
+            <param name="context">
+            The context of the current request. 
+            </param>
+            <param name="returnUrl">
+            The return url after users have completed authenticating against external website. 
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.OpenIdClient.VerifyAuthentication(System.Web.HttpContextBase)">
+            <summary>
+            Check if authentication succeeded after user is redirected back from the service provider.
+            </summary>
+            <param name="context">
+            The context of the current request. 
+            </param>
+            <returns>
+            An instance of <see cref="T:DotNetOpenAuth.AspNet.AuthenticationResult"/> containing authentication result. 
+            </returns>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.OpenIdClient.GetExtraData(DotNetOpenAuth.OpenId.RelyingParty.IAuthenticationResponse)">
+            <summary>
+            Gets the extra data obtained from the response message when authentication is successful.
+            </summary>
+            <param name="response">
+            The response message. 
+            </param>
+            <returns>Always null.</returns>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.OpenIdClient.OnBeforeSendingAuthenticationRequest(DotNetOpenAuth.OpenId.RelyingParty.IAuthenticationRequest)">
+            <summary>
+            Called just before the authentication request is sent to service provider.
+            </summary>
+            <param name="request">
+            The request. 
+            </param>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.Clients.OpenIdClient.ProviderName">
+            <summary>
+            Gets the name of the provider which provides authentication service.
+            </summary>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.GoogleOpenIdClient.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotNetOpenAuth.AspNet.Clients.GoogleOpenIdClient"/> class.
+            </summary>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.GoogleOpenIdClient.GetExtraData(DotNetOpenAuth.OpenId.RelyingParty.IAuthenticationResponse)">
+            <summary>
+            Gets the extra data obtained from the response message when authentication is successful.
+            </summary>
+            <param name="response">
+            The response message. 
+            </param>
+            <returns>A dictionary of profile data; or null if no data is available.</returns>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.GoogleOpenIdClient.OnBeforeSendingAuthenticationRequest(DotNetOpenAuth.OpenId.RelyingParty.IAuthenticationRequest)">
+            <summary>
+            Called just before the authentication request is sent to service provider.
+            </summary>
+            <param name="request">
+            The request. 
+            </param>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.Clients.YahooOpenIdClient">
+            <summary>
+            The yahoo open id client.
+            </summary>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.YahooOpenIdClient.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotNetOpenAuth.AspNet.Clients.YahooOpenIdClient"/> class.
+            </summary>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.YahooOpenIdClient.GetExtraData(DotNetOpenAuth.OpenId.RelyingParty.IAuthenticationResponse)">
+            <summary>
+            Gets the extra data obtained from the response message when authentication is successful.
+            </summary>
+            <param name="response">
+            The response message. 
+            </param>
+            <returns>A dictionary of profile data; or null if no data is available.</returns>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.Clients.YahooOpenIdClient.OnBeforeSendingAuthenticationRequest(DotNetOpenAuth.OpenId.RelyingParty.IAuthenticationRequest)">
+            <summary>
+            Called just before the authentication request is sent to service provider.
+            </summary>
+            <param name="request">
+            The request. 
+            </param>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.UriHelper">
+            <summary>
+            The uri helper.
+            </summary>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.UriHelper.AttachQueryStringParameter(System.Uri,System.String,System.String)">
+            <summary>
+            The attach query string parameter.
+            </summary>
+            <param name="url">
+            The url.
+            </param>
+            <param name="parameterName">
+            The parameter name.
+            </param>
+            <param name="parameterValue">
+            The parameter value.
+            </param>
+            <returns>An absolute URI.</returns>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.UriHelper.ConvertToAbsoluteUri(System.String,System.Web.HttpContextBase)">
+            <summary>
+            Converts an app-relative url, e.g. ~/Content/Return.cshtml, to a full-blown url, e.g. http://mysite.com/Content/Return.cshtml
+            </summary>
+            <param name="returnUrl">
+            The return URL. 
+            </param>
+            <param name="context">
+            The context.
+            </param>
+            <returns>An absolute URI.</returns>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.IOpenAuthDataProvider">
+            <summary>
+            Common methods available on identity issuers.
+            </summary>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.IOpenAuthDataProvider.GetUserNameFromOpenAuth(System.String,System.String)">
+            <summary>
+            Get a user name from an identity provider and their own assigned user ID.
+            </summary>
+            <param name="openAuthProvider">
+            The identity provider.
+            </param>
+            <param name="openAuthId">
+            The issuer's ID for the user.
+            </param>
+            <returns>
+            The username of the user.
+            </returns>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.OpenAuthAuthenticationTicketHelper">
+            <summary>
+            Helper methods for setting and retrieving a custom forms authentication ticket for delegation protocols.
+            </summary>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.OpenAuthAuthenticationTicketHelper.OpenAuthCookieToken">
+            <summary>
+            The open auth cookie token.
+            </summary>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.OpenAuthAuthenticationTicketHelper.IsValidAuthenticationTicket(System.Web.HttpContextBase)">
+            <summary>
+            Checks whether the specified HTTP request comes from an authenticated user.
+            </summary>
+            <param name="context">
+            The context.
+            </param>
+            <returns>True if the reuest is authenticated; false otherwise.</returns>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.OpenAuthAuthenticationTicketHelper.SetAuthenticationTicket(System.Web.HttpContextBase,System.String,System.Boolean)">
+            <summary>
+            Adds an authentication cookie to the user agent in the next HTTP response.
+            </summary>
+            <param name="context">
+            The context.
+            </param>
+            <param name="userName">
+            The user name.
+            </param>
+            <param name="createPersistentCookie">
+            A value indicating whether the cookie should persist across sessions.
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.OpenAuthAuthenticationTicketHelper.GetAuthCookie(System.String,System.Boolean)">
+            <summary>
+            Creates an HTTP authentication cookie.
+            </summary>
+            <param name="userName">
+            The user name.
+            </param>
+            <param name="createPersistentCookie">
+            A value indicating whether the cookie should last across sessions.
+            </param>
+            <returns>An authentication cookie.</returns>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.OpenAuthSecurityManager">
+            <summary>
+            Manage authenticating with an external OAuth or OpenID provider
+            </summary>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.OpenAuthSecurityManager.ProviderQueryStringName">
+            <summary>
+            The provider query string name.
+            </summary>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.OpenAuthSecurityManager.authenticationProvider">
+            <summary>
+            The _authentication provider.
+            </summary>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.OpenAuthSecurityManager.dataProvider">
+            <summary>
+            The _data provider.
+            </summary>
+        </member>
+        <member name="F:DotNetOpenAuth.AspNet.OpenAuthSecurityManager.requestContext">
+            <summary>
+            The _request context.
+            </summary>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.OpenAuthSecurityManager.#ctor(System.Web.HttpContextBase)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotNetOpenAuth.AspNet.OpenAuthSecurityManager"/> class.
+            </summary>
+            <param name="requestContext">
+            The request context. 
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.OpenAuthSecurityManager.#ctor(System.Web.HttpContextBase,DotNetOpenAuth.AspNet.IAuthenticationClient,DotNetOpenAuth.AspNet.IOpenAuthDataProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DotNetOpenAuth.AspNet.OpenAuthSecurityManager"/> class.
+            </summary>
+            <param name="requestContext">
+            The request context. 
+            </param>
+            <param name="provider">
+            The provider. 
+            </param>
+            <param name="dataProvider">
+            The data provider. 
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.OpenAuthSecurityManager.GetProviderName(System.Web.HttpContextBase)">
+            <summary>
+            Gets the provider that is responding to an authentication request.
+            </summary>
+            <param name="context">
+            The HTTP request context.
+            </param>
+            <returns>
+            The provider name, if one is available.
+            </returns>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.OpenAuthSecurityManager.Login(System.String,System.Boolean)">
+            <summary>
+            Checks if the specified provider user id represents a valid account. If it does, log user in.
+            </summary>
+            <param name="providerUserId">
+            The provider user id. 
+            </param>
+            <param name="createPersistentCookie">
+            if set to <c>true</c> create persistent cookie. 
+            </param>
+            <returns>
+            <c>true</c> if the login is successful. 
+            </returns>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.OpenAuthSecurityManager.RequestAuthentication(System.String)">
+            <summary>
+            Requests the specified provider to start the authentication by directing users to an external website
+            </summary>
+            <param name="returnUrl">
+            The return url after user is authenticated. 
+            </param>
+        </member>
+        <member name="M:DotNetOpenAuth.AspNet.OpenAuthSecurityManager.VerifyAuthentication">
+            <summary>
+            Checks if user is successfully authenticated when user is redirected back to this user.
+            </summary>
+            <returns>The result of the authentication.</returns>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.OpenAuthSecurityManager.IsAuthenticatedWithOpenAuth">
+            <summary>
+            Gets a value indicating whether IsAuthenticatedWithOpenAuth.
+            </summary>
+        </member>
+        <member name="T:DotNetOpenAuth.AspNet.WebResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.WebResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.WebResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.WebResources.ConnectionNotSecure">
+            <summary>
+              Looks up a localized string similar to A setting in web.config requires a secure connection for this request but the current connection is not secured..
+            </summary>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.WebResources.FailedToEncryptTicket">
+            <summary>
+              Looks up a localized string similar to Unable to encrypt the authentication ticket..
+            </summary>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.WebResources.OAuthDataProviderRegistered">
+            <summary>
+              Looks up a localized string similar to An OAuth data provider has already been registered for this application..
+            </summary>
+        </member>
+        <member name="P:DotNetOpenAuth.AspNet.WebResources.OpenIDFailedToGetResponse">
+            <summary>
+              Looks up a localized string similar to Failed to obtain the authentication response from service provider..
+            </summary>
+        </member>
+    </members>
+</doc>
