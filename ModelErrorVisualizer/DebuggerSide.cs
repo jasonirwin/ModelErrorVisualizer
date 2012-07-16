@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.DebuggerVisualizers;
 [assembly: System.Diagnostics.DebuggerVisualizer(
 typeof(TestVisualizer.DebuggerSide),
 Target = typeof(ModelStateDictionary),
-Description = "ScripterVisualizer")]
+Description = "Model Error Visualizer")]
 namespace TestVisualizer
 {
     public class DebuggerSide : DialogDebuggerVisualizer
